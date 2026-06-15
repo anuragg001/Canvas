@@ -66,9 +66,16 @@ export const STEPS = [
 ];
 
 export const PLACEHOLDERS = [
-  "A task manager with priority labels and drag-and-drop…",
-  "A crypto portfolio tracker with live charts…",
-  "A markdown notes app with live preview…",
-  "An expense tracker with monthly breakdowns…",
-  "A habit tracker with streaks and heatmaps…",
+ 
+  "Build me the next Airbnb for pet owners...",
+  "Create a SaaS that helps freelancers manage clients...",
+  "Make a Duolingo-style app for learning coding...",
+  "Build a Reddit clone for engineering students...",
+  "Create an AI-powered resume builder...",
+  "Make a startup idea validator with market research...",
+  "Build a Discord-style community platform...",
+  "Create a Notion alternative focused on students...",
+  "Build a modern CRM for small businesses...",
+  "Make an app that tracks gym progress and nutrition..."
+
 ];
