@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Canvas: Ai App Builder",
   description: "Describe it, We'll Build it",
   icons: {
-    icon: "/logo-short.png"
+    icon: "/canvas_logo2.png",
   }
 };
 

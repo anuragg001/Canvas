@@ -7,7 +7,7 @@ import { BlueTitle, GrayTitle, SectionHeading, SectionLabel } from "@/components
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { SignInButton, useAuth } from "@clerk/nextjs";
+import { PricingTable, SignInButton, useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { FEATURES, PLACEHOLDERS, STEPS, SUGGESTIONS } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -167,7 +167,7 @@ export default function Home() {
             </div>
 
             <div className="mx-auto flex h-6 w-64 items-center justify-center rounded-md bg-white/5 px-3">
-              <span className="text-xs text-white/25">forge.app/workspace</span>
+              <span className="text-xs text-white/25">canvas.app/workspace</span>
             </div>
           </div>
 
@@ -349,8 +349,19 @@ export default function Home() {
             No credit card required. Upgrade or downgrade anytime.
           </p>
         </div>
-        <div className="mx-auto max-w-3xl">
-
+        <div className="mx-auto max-w-5xl">
+          <PricingTable
+          checkoutProps={{
+            appearance:{
+              elements:{
+                drawerRoot:{
+                  zIndex:2000,
+                }
+              }
+            }
+          }}
+          
+          />
         </div>
       </section>
 
