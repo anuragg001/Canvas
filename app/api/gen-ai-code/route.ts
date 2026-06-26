@@ -4,6 +4,7 @@ import { FileData, Message } from "@/types/workspace";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { aj } from "@/lib/arcjet";  
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEN_AI_KEY! });
 
 function trimHistory(messages: Message[]): Message[] {
@@ -142,6 +143,22 @@ export async function POST(request: NextRequest) {
     }
 
     // arcjet reate limiting  prompt injection sensitve info
+    const lastUserMessage = 
+    [...messages].reverse().find((m)=> m.role === "user")?.content ?? "";
+
+    const decision = await aj.protect(request,{
+        requested: 1,
+        userId: clerkId,
+        detectPromptInjectionMessage: lastUserMessage, 
+    })
+    if(decision.isDenied()){
+        // returns the reason type as the message - ratelimit, bot , promptInjection, etc
+        return Response.json({
+            message: decision.reason?.type ?? "Request denied by Arcjet"
+        },{
+            status: 429
+        })
+    }
 
 
     //if user exist on our db 
@@ -177,7 +194,7 @@ export async function POST(request: NextRequest) {
                 const contents = buildContents(messages, fileData);
 
                 const geminiStream = await ai.models.generateContentStream({
-                    model: "gemini-3.5-flash",
+                    model: "gemini-2.5-flash",
                     contents,
                     config: {
                         systemInstruction: SYSTEM_PROMPT,
